@@ -25,26 +25,13 @@ if (Minitalk.version < 70000) {
 	me.limit = 1;
 }
 
-// 미니톡에 접속된 뒤, 자신의 권한에 따라 알림메시지를 출력한다.
-Minitalk.on("connect",function(minitalk,channel,user) {
-	if (Minitalk.version < 70000) {
-		if (Minitalk.user.checkLimit(me.limit,user.opper) == true) {
-			minitalk.ui.printMessage("system","채팅메시지에 URL을 포함할 수 없습니다.");
-		}
-	} else {
-		if (user.level < me.limit) {
-			minitalk.ui.printSystemMessage("info","채팅메시지에 URL을 포함할 수 없습니다.");
-		}
-	}
-});
-
 // 메시지 전송직전 URL 이 포함되어 있는지 확인한다.
 Minitalk.on("beforeSendMessage",function(minitalk,message,user) {
 	// 메시지에 URL 이 포함된 경우
 	if (message.search(/(http|https|ftp):\/\//) >= 0) {
 		if (Minitalk.version < 70000) {
 			if (Minitalk.user.checkLimit(me.limit,user.opper) == true) {
-				minitalk.ui.printMessage("error","채팅메시지에 URL을 포함할 수 없습니다.");
+				minitalk.ui.printSystemMessage("error","채팅메시지에 URL을 포함할 수 없습니다.");
 				return false;
 			}
 		} else {
