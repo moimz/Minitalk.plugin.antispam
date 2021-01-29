@@ -15,7 +15,7 @@ if (Minitalk === undefined) return;
  * 안티스팸 플러그인 적용을 받지 않을 최소권한
  * 0 ~ 9 : 0 : 손님, 9 : 관리자
  */
-me.limit = 0;
+me.limit = 1;
 
 // 메시지 전송직전 URL 이 포함되어 있는지 확인한다.
 Minitalk.on("beforeSendMessage",function(minitalk,message,user) {
