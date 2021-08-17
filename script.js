@@ -6,8 +6,8 @@
  * @file /plugins/antispam/script.js
  * @author Arzz (arzz@arzz.com)
  * @license MIT License
- * @version 1.0.0
- * @modified 2021. 1. 21.
+ * @version 1.0.1
+ * @modified 2021. 8. 17.
  */
 if (Minitalk === undefined) return;
 
@@ -18,10 +18,10 @@ if (Minitalk === undefined) return;
 me.limit = 1;
 
 // 메시지 전송직전 URL 이 포함되어 있는지 확인한다.
-Minitalk.on("beforeSendMessage",function(minitalk,message,user) {
+Minitalk.on("beforeSendMessage",function(minitalk,message) {
 	// 메시지에 URL 이 포함된 경우
 	if (message.search(/(http|https|ftp):\/\//) >= 0) {
-		if (user.level < me.limit) {
+		if (minitalk.user.me.level < me.limit) {
 			minitalk.ui.printSystemMessage("error","채팅메시지에 URL을 포함할 수 없습니다.");
 			return false;
 		}
